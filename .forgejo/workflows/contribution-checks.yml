@@ -1,0 +1,28 @@
+# Deliberate no-op, and deliberately present.
+#
+# COPY THIS AS A PAIR. This repository's contribution gates -- the DCO check
+# and the ICLA significance check -- run on GitHub and only on GitHub. That is
+# not an oversight: external contributions can only arrive there, so that is
+# where the gates belong.
+#
+# This file exists because the Forgejo runner falls back to running
+# .github/workflows/ wholesale when .forgejo/workflows/ is absent, and that
+# fallback is per DIRECTORY, not per file. Without this file the gate callers
+# would be picked up here, where they cannot resolve `uses:` against
+# github.com and have nothing to check. Deleting it re-arms that fallback.
+#
+# If this repository later grows real Forgejo CI, delete this file -- the
+# directory will no longer be empty and the shadow is no longer needed.
+name: Contribution checks (shadow)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  noop:
+    name: No-op
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Contribution gates run on GitHub. This file exists only to keep"
+          echo "the Forgejo runner from falling back to .github/workflows/."
